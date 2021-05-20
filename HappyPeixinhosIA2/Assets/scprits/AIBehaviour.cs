@@ -6,7 +6,6 @@ using AIUnityExamples.Movement.Core;
 public class AIBehaviour : MonoBehaviour
 {
     [SerializeField] private float wanderTime;
-
     private bool hitWall;
     private Vector3 targetEulerAngles;
 
@@ -37,29 +36,32 @@ public class AIBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        print($"hitWall? {hitWall}");
-        if (wanderTime > 0) {
-            if (hitWall) {
-                transform.eulerAngles = targetEulerAngles;
-                targetEulerAngles = Vector3.zero;
-                hitWall = false;
-            }
-            transform.Translate(Vector3.forward * Time.deltaTime * movementSpeed);
-            
-            wanderTime -= Time.deltaTime; 
-        }
-        else {
-            wanderTime = Random.Range(3f, 4f);
-            Wander ();
-        }
+        //print($"hitWall? {hitWall}");
+        //if (wanderTime > 0) {
+        //    if (hitWall) {
+        //        transform.eulerAngles = targetEulerAngles;
+        //        targetEulerAngles = Vector3.zero;
+        //        hitWall = false;
+        //    }
+        //    transform.Translate(Vector3.forward * Time.deltaTime * movementSpeed);
+        //    
+        //    wanderTime -= Time.deltaTime; 
+        //}
+        //else {
+        //    wanderTime = Random.Range(3f, 4f);
+        //    Wander ();
+        //}
 
         //if (FishInSight()){
-        //    SeekAction();
+        //    SeekPersueAction();
         //    print("im see the bitch");
         //     
         //}
-    }
 
+        if (FishInSight ()) {
+            SeekFleeAction();
+        }
+    }
 
     private void OnTriggerEnter(Collider other) {
         bool wall = other.CompareTag("Wall");
@@ -82,16 +84,23 @@ public class AIBehaviour : MonoBehaviour
 
     private void OnDrawGizmos() {
         Gizmos.color = Color.red;
+        Color r = Color.yellow; 
+        r.a = 0.4f;
         Vector3 dir = transform.TransformDirection(Vector3.forward * 200f);
         Gizmos.DrawRay(transform.position, dir);
-    }
 
+        Gizmos.color = r;
+        Gizmos.DrawSphere(fish.transform.position, fishInSightDistance);
+    }
+    
+    // --------------------------WANDER MOVEMENT-------------------------------  //
 
     void Wander () {
         transform.eulerAngles = new Vector3 (
             Random.Range(-20, 20), Random.Range (transform.eulerAngles.y - 20, transform.eulerAngles.y + 20), 0);
     }
 
+    
     
     // Check if fish is in sight
     private bool FishInSight()
@@ -103,12 +112,19 @@ public class AIBehaviour : MonoBehaviour
     }
     
         // Seek player action
-    private void SeekAction()
+    private void SeekPersueAction()
     {
         // Move towards player
         MoveTowardsTarget(fish.transform.position);
     }
 
+    private void SeekFleeAction()
+    {
+        // Move towards player
+        MoveAwayTarget(fish.transform.position);
+    }
+
+    // --------------------------PERSUE MOVEMENT-------------------------------  //
     private void MoveTowardsTarget(Vector3 targetPos)
     {
         // Determine velocity to the target
@@ -119,6 +135,19 @@ public class AIBehaviour : MonoBehaviour
         print("im movingbitch");
 
     }
+
+
+    // --------------------------FLEE MOVEMENT-------------------------------  //
+    private void MoveAwayTarget(Vector3 targetPos)
+    {
+        Vector3 dir = transform.position - targetPos;
+        
+        transform.Translate(dir.normalized * movementSpeed * Time.deltaTime);
+
+    }
+
+    
+    
 }
 
 

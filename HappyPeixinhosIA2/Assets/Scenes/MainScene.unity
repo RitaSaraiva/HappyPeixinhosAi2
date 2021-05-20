@@ -5360,7 +5360,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4603732824687050795, guid: a66c90ec50a95304c91bd7b6ab82fc4a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5891.7
+      value: -6268
       objectReference: {fileID: 0}
     - target: {fileID: 4603732824687050795, guid: a66c90ec50a95304c91bd7b6ab82fc4a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6581,7 +6581,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wanderTime: 0
   movementSpeed: 140
-  fishInSightDistance: 1405.89
+  fishInSightDistance: 169
   fish: {fileID: 852528306}
 --- !u!1001 &2069481327
 PrefabInstance:

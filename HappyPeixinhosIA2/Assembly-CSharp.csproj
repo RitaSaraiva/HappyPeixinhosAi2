@@ -36,9 +36,9 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\scprits\GameArea.cs" />
      <Compile Include="Assets\water\Scripts\LowPolyWater.cs" />
      <Compile Include="Assets\scprits\AIBehaviour.cs" />
+     <Compile Include="Assets\scprits\Fish.cs" />
      <None Include="Assets\sand\Materials\Shaders\Vertex_Color_Unlit.shader" />
      <None Include="Assets\sand\Materials\Shaders\Vertex_Color_Basic.shader" />
      <None Include="Assets\water\Shaders\WaterShaded.shader" />
