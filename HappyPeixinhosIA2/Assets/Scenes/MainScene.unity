@@ -1740,6 +1740,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c6303ea4f279a0448f7e38470d26ca2, type: 3}
+--- !u!1 &385023546 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2022036273397845949, guid: 7c6303ea4f279a0448f7e38470d26ca2, type: 3}
+  m_PrefabInstance: {fileID: 385023545}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &385023547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385023546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48ec7f73b84811542af60c3f51e77016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyAsFood: 0
+  startEnergyVal: 0
+  dangerList: 0100000002000000
+  foodList: 00000000
 --- !u!1 &400660030
 GameObject:
   m_ObjectHideFlags: 0
@@ -3098,6 +3119,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7223436510855899414, guid: 73d25b60be17e494ab4e66e7e30d50f4, type: 3}
   m_PrefabInstance: {fileID: 2017258222}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &852528307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852528306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e63c315a26e64f643a9436109a37c941, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyAsFood: 0
+  startEnergyVal: 0
+  dangerList: 03000000
+  foodList: 0100000000000000
 --- !u!54 &852528310
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6567,6 +6604,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!114 &2060024808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060024806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 852f6f7278f1fe04c89c531abe955424, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyAsFood: 0
+  startEnergyVal: 0
+  dangerList: 
+  foodList: 0200000001000000
 --- !u!114 &2060024810
 MonoBehaviour:
   m_ObjectHideFlags: 0

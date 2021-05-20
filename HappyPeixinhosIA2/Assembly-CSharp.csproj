@@ -36,9 +36,15 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\scprits\IFish.cs" />
      <Compile Include="Assets\water\Scripts\LowPolyWater.cs" />
      <Compile Include="Assets\scprits\AIBehaviour.cs" />
-     <Compile Include="Assets\scprits\Fish.cs" />
+     <Compile Include="Assets\scprits\IFood.cs" />
+     <Compile Include="Assets\scprits\BasicFish.cs" />
+     <Compile Include="Assets\scprits\smallbean.cs" />
+     <Compile Include="Assets\scprits\FishType.cs" />
+     <Compile Include="Assets\scprits\mediumbean.cs" />
+     <Compile Include="Assets\scprits\bigbean.cs" />
      <None Include="Assets\sand\Materials\Shaders\Vertex_Color_Unlit.shader" />
      <None Include="Assets\sand\Materials\Shaders\Vertex_Color_Basic.shader" />
      <None Include="Assets\water\Shaders\WaterShaded.shader" />
