@@ -17,7 +17,7 @@
 
 
 #### Decision Tree
-![Decision Tree](/HappyPeixinhosAi2/decisionTree.png "DecisionTree")
+![Decision Tree](decisionTree.png "DecisionTree")
 
 Relativamente ás decision trees usei como principal inspiração a soluçao dos exercicios
 relacionados com a matéria de decisões, mais especificamente o que tem o enunciado 
