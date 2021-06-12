@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Wall
   - VerticalLimits
+  - BigFish
+  - MediumFish
+  - SmallFish
+  - Algae
   layers:
   - Default
   - TransparentFX
@@ -15,10 +19,10 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - LargeFish
+  - MediumFish
+  - SmallFish
+  - Algae
   - 
   - 
   - 

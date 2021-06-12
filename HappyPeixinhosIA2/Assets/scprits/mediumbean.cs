@@ -17,8 +17,6 @@ public class mediumbean : BasicFish
     {
         energyvalue = energyAsFood;
         energy = startEnergyVal;
-
-
     }
 
     // Update is called once per frame
