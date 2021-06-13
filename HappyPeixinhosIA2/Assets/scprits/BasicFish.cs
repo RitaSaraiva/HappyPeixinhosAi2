@@ -21,15 +21,6 @@ public abstract class BasicFish : MonoBehaviour, IFish, IFood
     //energia
     public float energy {get; set;}
 
-    //Saber que comida
-    public List<FishType> foodlist {get; set;}
-
-    //Saber quais os inimigos
-    public List<FishType> dangerfish {get; set;}
-
-    [SerializeField] private LayerMask targetLayers;
-    [SerializeField] private LayerMask dangerLayers;
-
     //Reproduzir
     protected void Reproduce() {
         energy /= 2;
@@ -47,31 +38,13 @@ public abstract class BasicFish : MonoBehaviour, IFish, IFood
         }
     }
 
-<<<<<<< HEAD
-=======
-    [SerializeField] private LayerMask targetLayers;
-    [SerializeField] private LayerMask dangerLayers;
-
-    //Reproduzir
-    protected void Reproduce() {
-        energy /= 2;
-        print(energy);
-        Instantiate(this);
+    //comer
+    public void Eat(IFood target) {
+        energy += target.energyvalue;
     }
 
-    //perda de energia por segundo
-    protected void EnergyDecay() {
-        decayTimer = Time.deltaTime;
-        if (decayTimer > 1f)
-        {
-            energy -= energyPerSec;
-            decayTimer = 0f;
-        }
-    }
-
->>>>>>> 1693c6a32c26015ac7f769788a7070a3c55fea52
     //morrer
-    protected virtual void Death() {
-        GameObject.Destroy(this);
+    public virtual void Death() {
+        GameObject.Destroy(this.gameObject);
     }
 }

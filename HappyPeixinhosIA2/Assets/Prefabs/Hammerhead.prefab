@@ -168,15 +168,9 @@ GameObject:
   - component: {fileID: 7704436383004567448}
   - component: {fileID: 4780995630777106825}
   - component: {fileID: 1185188049342108734}
-<<<<<<< HEAD
   - component: {fileID: 1357383913665837015}
   - component: {fileID: 1185188049342108721}
   - component: {fileID: 1185188049342108723}
-=======
-  - component: {fileID: 1185188049342108721}
-  - component: {fileID: 1185188049342108723}
-  - component: {fileID: 1357383913665837015}
->>>>>>> 1693c6a32c26015ac7f769788a7070a3c55fea52
   m_Layer: 8
   m_Name: Hammerhead
   m_TagString: BigFish
@@ -248,7 +242,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
-<<<<<<< HEAD
 --- !u!135 &1357383913665837015
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -262,8 +255,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 7.27
   m_Center: {x: 0, y: 0, z: 0}
-=======
->>>>>>> 1693c6a32c26015ac7f769788a7070a3c55fea52
 --- !u!114 &1185188049342108721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,16 +269,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   energyToReproduce: 100
   energyPerSec: 1
-  targetLayers:
-    serializedVersion: 2
-<<<<<<< HEAD
-    m_Bits: 0
-=======
-    m_Bits: 1536
->>>>>>> 1693c6a32c26015ac7f769788a7070a3c55fea52
-  dangerLayers:
-    serializedVersion: 2
-    m_Bits: 0
   energyAsFood: 0
   startEnergyVal: 150
   dangerList: 
@@ -304,43 +285,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b03847e9c5ec6644ba8a7be54ab7a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
   gameArea: {fileID: 0}
   LimitPaddings: {x: 50, y: 10, z: 50}
-=======
-  wanderTime: 0
-  gameArea: {fileID: 0}
->>>>>>> 1693c6a32c26015ac7f769788a7070a3c55fea52
-  xLimitPadding: 50
-  yLimitPadding: 10
-  zLimitPadding: 50
   targetPos: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
   movementSpeed: 50
-  fishInSightDistance: 169
+  targetInSightDistance: 7
+  targetInEatingDistance: 100.88
   currentTarget: {fileID: 0}
   currentDanger: {fileID: 0}
   fishScript: {fileID: 0}
-=======
-  movementSpeed: 140
-  fishInSightDistance: 169
-  fish: {fileID: 0}
-  targetFish: {fileID: 0}
-  fishScript: {fileID: 0}
---- !u!135 &1357383913665837015
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1858373681430560407}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 7.27
-  m_Center: {x: 0, y: 0, z: 0}
->>>>>>> 1693c6a32c26015ac7f769788a7070a3c55fea52
 --- !u!1 &1906944502219884181
 GameObject:
   m_ObjectHideFlags: 0

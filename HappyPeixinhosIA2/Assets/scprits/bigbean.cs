@@ -21,7 +21,6 @@ public class bigbean : BasicFish
     // Update is called once per frame
     void Update()
     {
-        print($"Current Energy: {energy}");
         if (energy > energyToReproduce && Input.GetKeyDown(KeyCode.Q))
         {
             Reproduce();
