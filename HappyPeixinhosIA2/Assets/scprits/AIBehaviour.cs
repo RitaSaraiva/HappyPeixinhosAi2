@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using LibGameAI.DecisionTrees;
 
 public class AIBehaviour : MonoBehaviour
 {
@@ -20,24 +21,35 @@ public class AIBehaviour : MonoBehaviour
     [SerializeField] private GameObject currentDanger;
     [SerializeField] private BasicFish fishScript;
 
-    // Reference to the agent's rigid body
-    private Rigidbody rb;
-    private bool hitWall;
+    private bool canEatTarget;
 
     private SphereCollider sphereCol;
     private List<GameObject> bigFishNearby = new List<GameObject>();
     private List<GameObject> mediumFishNearby = new List<GameObject>();
     private List<GameObject> smallFishNearby = new List<GameObject>();
     private List<GameObject> algaeNearby = new List<GameObject>();
-    
+
+    private IDecisionTreeNode rootCanSeeFood;
+
     //--------------------------------------------------------------------//
 
     private void Start() {
         sphereCol.radius = targetInSightDistance;
+
+        // Create decision tree nodes
+        IDecisionTreeNode wander = new ActionNode(WanderAction);
+        IDecisionTreeNode seekPursue = new ActionNode(SeekPursueAction);
+        IDecisionTreeNode seekFlee = new ActionNode(SeekFleeAction);
+        IDecisionTreeNode eat = new ActionNode(EatTarget);
+        IDecisionTreeNode seggsyTime = new ActionNode(fishScript.Reproduce);
+
+        IDecisionTreeNode canEatFood = new DecisionNode(TargetInEatRange, eat, seekPursue);
+        IDecisionTreeNode canSeggs = new DecisionNode(CanReproduce, seggsyTime, wander);
+        IDecisionTreeNode canSeeEnemy = new DecisionNode(DangerInSight, seekFlee, canSeggs);
+        rootCanSeeFood = new DecisionNode(TargetInSight, canEatFood, canSeeEnemy);
     }
     
     void Awake() {
-        rb = GetComponent<Rigidbody>();
         fishScript = GetComponent<BasicFish>();
         gameArea = FindObjectOfType<GameArea>();
         sphereCol = GetComponent<SphereCollider>();
@@ -46,58 +58,41 @@ public class AIBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // ------------ WANDER (NEW - EXPERIMENTING)
+        //print($"algae targets: {algaeNearby.Count}");
+        print(fishScript.energy);
 
-        //if (targetPos == Vector3.zero){
-        //    print("fds para lá bro");
-        //    targetPos = WanderTargetPosition();
-        //}
-        //else{
-        //    RotateNPC(targetPos, movementSpeed * Time.deltaTime);
-        //    transform.position = Vector3.MoveTowards(transform.position, targetPos, movementSpeed * Time.deltaTime);
-        //    if (Vector3.Distance(transform.position, targetPos) < 2.5f)
-        //        targetPos = Vector3.zero;
-        //}
+        ActionNode actionNode = rootCanSeeFood.MakeDecision() as ActionNode;
+        actionNode.Execute();
+    }
 
-        // ------ END WANDER (NEW - EXPERIMENTING)
-
-        // ------------ WANDER (OLD - "WORKING")
-
-        //print($"hitWall? {hitWall}");
-        //if (wanderTime > 0) {
-        //    if (hitWall) {
-        //        transform.eulerAngles = targetEulerAngles;
-        //        targetEulerAngles = Vector3.zero;
-        //        hitWall = false;
-        //    }
-        //    transform.Translate(Vector3.forward * Time.deltaTime * movementSpeed);
-        //    
-        //    wanderTime -= Time.deltaTime; 
-        //}
-        //else {
-        //    wanderTime = Random.Range(3f, 4f);
-        //    Wander ();
-        //}
-
-        // ------ END WANDER (OLD - "WORKING")
-
-        // ------------ SEEK PURSUE
-
-        if (currentTarget != null || TargetInSight()){
-            SeekPersueAction();
-            //print("im see the bitch");
-            EatTarget();
+    private void WanderAction() {
+        if (targetPos == Vector3.zero)
+        {
+            targetPos = WanderTargetPosition();
         }
-
-        // ------ END SEEK PURSUE
-
-        // ------------ SEEK FLEE
-
-        if (currentDanger != null || DangerInSight()) {
-            SeekFleeAction();
+        else
+        {
+            RotateNPC(targetPos, movementSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position,
+                targetPos, movementSpeed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, targetPos) < 2.5f)
+                targetPos = Vector3.zero;
         }
+    }
 
-        // ------ END SEEK FLEE
+    private void SeekPursueAction() {
+        if (currentTarget != null)
+        {
+            PursueAction();
+            print("im see the bitch");
+        }
+    }
+
+    private void SeekFleeAction() {
+        if (currentDanger != null)
+        {
+            FleeAction();
+        }
     }
 
     private Vector3 WanderTargetPosition(){
@@ -119,7 +114,8 @@ public class AIBehaviour : MonoBehaviour
  
         //get new direction to look at for target
         Vector3 LookAt = waypoint - this.transform.position;
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(LookAt), TurnSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, 
+            Quaternion.LookRotation(LookAt), TurnSpeed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -171,13 +167,6 @@ public class AIBehaviour : MonoBehaviour
         r = Color.red;
         Gizmos.color = r;
         Gizmos.DrawSphere(targetPos, 10f);
-    }
-    
-    // --------------------------WANDER MOVEMENT-------------------------------  //
-
-    void Wander () {
-        transform.eulerAngles = new Vector3 (
-            Random.Range(-20, 20), Random.Range (transform.eulerAngles.y - 20, transform.eulerAngles.y + 20), 0);
     }
     
     // Check if fish is in sight
@@ -251,6 +240,7 @@ public class AIBehaviour : MonoBehaviour
             currentTarget = closestTgt.obj;
             if (currentTarget != null) return true;
         }
+        if (currentTarget != null) return true;
         return false;
     }
 
@@ -298,13 +288,13 @@ public class AIBehaviour : MonoBehaviour
     }
     
         // Seek player action
-    private void SeekPersueAction()
+    private void PursueAction()
     {
         // Move towards player
         MoveTowardsTarget(currentTarget.transform.position);
     }
 
-    private void SeekFleeAction()
+    private void FleeAction()
     {
         // Move towards player
         MoveAwayTarget(currentDanger.transform.position);
@@ -357,12 +347,27 @@ public class AIBehaviour : MonoBehaviour
         //print("im running bitch");
     }
 
+    private bool TargetInEatRange() {
+        float dist = Vector3.Distance(transform.position,
+            currentTarget.transform.position);
+        if (currentTarget != null && dist < targetInEatingDistance) {
+            print("can eat");
+            canEatTarget = true;
+            return true;
+        }
+        print("cant eat");
+        canEatTarget = false;
+        return false;
+    }
+
     private void EatTarget() {
-        if (Vector3.Distance(transform.position, currentTarget.transform.position) < targetInEatingDistance) {
-            BasicFish tgt;
-            if (currentTarget.TryGetComponent<BasicFish>(out tgt)) {
-                print($"energy before eating: {fishScript.energy}");
-                fishScript.Eat(tgt as IFood);
+        print(canEatTarget);
+        if (canEatTarget) {
+            BasicFish tgt = null;
+            Algae algaeTgt = null;
+            if (currentTarget.TryGetComponent<BasicFish>(out tgt) || currentTarget.TryGetComponent<Algae>(out algaeTgt)) {
+                if (tgt != null) fishScript.Eat(tgt as IFood);
+                else if (algaeTgt != null) fishScript.Eat(algaeTgt as IFood);
                 switch(currentTarget.tag) {
                     case "MediumFish":
                         mediumFishNearby.Remove(currentTarget);
@@ -375,10 +380,15 @@ public class AIBehaviour : MonoBehaviour
                         break;
                 }
                 currentTarget = null;
-                tgt.Death();
-
-                print($"energy after eating: {fishScript.energy}");
+                if (tgt != null) tgt.Death();
+                else if (algaeTgt != null) algaeTgt.RemoveAlgae();
+                canEatTarget = false;
             }
         }
+    }
+
+    private bool CanReproduce() {
+        if (fishScript.energy > fishScript.EnergyToReproduce) return true;
+        return false;
     }
 }

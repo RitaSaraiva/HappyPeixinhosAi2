@@ -20,9 +20,15 @@ public abstract class BasicFish : MonoBehaviour, IFish, IFood
 
     //energia
     public float energy {get; set;}
+    public float EnergyToReproduce { get => energyToReproduce; }
+
+    private void Update() {
+        EnergyDecay();
+        if (energy < 0) Death();
+    }
 
     //Reproduzir
-    protected void Reproduce() {
+    public void Reproduce() {
         energy /= 2;
         print(energy);
         Instantiate(this);
@@ -30,11 +36,14 @@ public abstract class BasicFish : MonoBehaviour, IFish, IFood
 
     //perda de energia por segundo
     protected void EnergyDecay() {
-        decayTimer = Time.deltaTime;
-        if (decayTimer > 1f)
+        if (decayTimer > 0)
+        {
+            decayTimer -= Time.deltaTime;
+        }
+        else
         {
             energy -= energyPerSec;
-            decayTimer = 0f;
+            decayTimer = 1f;
         }
     }
 

@@ -422,16 +422,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48ec7f73b84811542af60c3f51e77016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyToReproduce: 0
-  energyPerSec: 0
-  targetLayers:
-    serializedVersion: 2
-    m_Bits: 2048
-  dangerLayers:
-    serializedVersion: 2
-    m_Bits: 768
-  energyAsFood: 0
-  startEnergyVal: 0
+  energyToReproduce: 25
+  energyPerSec: 1
+  energyAsFood: 5
+  startEnergyVal: 10
   dangerList: 0300000002000000
   foodList: 00000000
 --- !u!114 &-5370483755719185631
@@ -451,7 +445,7 @@ MonoBehaviour:
   targetPos: {x: 0, y: 0, z: 0}
   movementSpeed: 60
   targetInSightDistance: 7.5
-  targetInEatingDistance: 7.5
+  targetInEatingDistance: 4
   currentTarget: {fileID: 0}
   currentDanger: {fileID: 0}
   fishScript: {fileID: 0}

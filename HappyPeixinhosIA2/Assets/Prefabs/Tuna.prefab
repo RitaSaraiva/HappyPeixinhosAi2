@@ -514,10 +514,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e63c315a26e64f643a9436109a37c941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyToReproduce: 0
-  energyPerSec: 0
-  energyAsFood: 1
-  startEnergyVal: 0
+  energyToReproduce: 50
+  energyPerSec: 1
+  energyAsFood: 10
+  startEnergyVal: 20
   dangerList: 03000000
   foodList: 0100000000000000
 --- !u!114 &-7140691466774178951

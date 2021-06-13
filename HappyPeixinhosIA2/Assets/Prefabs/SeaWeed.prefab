@@ -329,10 +329,11 @@ GameObject:
   - component: {fileID: 1653723879756775035}
   - component: {fileID: 6019485132424090991}
   - component: {fileID: 3893794702361611482}
+  - component: {fileID: 7978508410735933594}
   - component: {fileID: 6257706929784222250}
   m_Layer: 0
   m_Name: SeaWeed
-  m_TagString: Untagged
+  m_TagString: Algae
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -385,6 +386,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.4073219, z: 1}
   m_Center: {x: 0, y: 0.69244695, z: 0}
+--- !u!54 &7978508410735933594
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2353250393144511592}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 3
 --- !u!114 &6257706929784222250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,6 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf639c1c36d7d734ea96d35335659739, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  energyAsFood: 2.5
   floatUpSpeed: 25
 --- !u!1 &2628858577038314704
 GameObject:

@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Algae : MonoBehaviour, IFood
 {
+    [SerializeField] private float energyAsFood;
     [SerializeField] private float floatUpSpeed;
     public float energyvalue {get; set;}
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        energyvalue = energyAsFood;
     }
 
     // Update is called once per frame
@@ -21,7 +22,11 @@ public class Algae : MonoBehaviour, IFood
     
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("VerticalLimits")) {
-            GameObject.Destroy(this.gameObject);
+            RemoveAlgae();
         }
+    }
+
+    public void RemoveAlgae() {
+        GameObject.Destroy(this.gameObject);
     }
 }
