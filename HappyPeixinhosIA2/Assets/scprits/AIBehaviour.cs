@@ -4,10 +4,20 @@ using UnityEngine;
 
 public class AIBehaviour : MonoBehaviour
 {
+<<<<<<< HEAD
     // Reference to gamearea object
     [SerializeField] private GameArea gameArea;
     // Paddings on area limits
     [SerializeField] private Vector3 LimitPaddings;
+=======
+    [SerializeField] private float wanderTime;
+    // Reference to gamearea object
+    [SerializeField] private GameArea gameArea;
+    // Paddings on area limits
+    [SerializeField] private float xLimitPadding;
+    [SerializeField] private float yLimitPadding;
+    [SerializeField] private float zLimitPadding;
+>>>>>>> 1693c6a32c26015ac7f769788a7070a3c55fea52
     [SerializeField] private Vector3 targetPos;
 
     // Speed of AI agent movement
@@ -19,9 +29,12 @@ public class AIBehaviour : MonoBehaviour
     [SerializeField] private GameObject currentDanger;
     [SerializeField] private BasicFish fishScript;
 
+    [SerializeField] private GameObject fish;
+
     // Reference to the agent's rigid body
     private Rigidbody rb;
     private bool hitWall;
+<<<<<<< HEAD
 
     
     private List<GameObject> bigFishNearby = new List<GameObject>();
@@ -33,6 +46,27 @@ public class AIBehaviour : MonoBehaviour
 
     private void Start() {
 
+=======
+    private Vector3 targetEulerAngles;
+    private LayerMask targetsMask;
+    [SerializeField] private GameObject targetFish;
+    [SerializeField] private BasicFish fishScript;
+
+    private SphereCollider sphereCol;
+    
+    private List<(GameObject tgt, float dist)> mediumFishTargets =
+        new List<(GameObject, float)>();
+    private List<(GameObject tgt, float dist)> smallFishTargets =
+        new List<(GameObject, float)>();
+    private List<(GameObject tgt, float dist)> algaeTargets =
+        new List<(GameObject, float)>();
+    
+    //--------------------------------------------------------------------//
+
+    private void Start() {
+        targetEulerAngles = Vector3.zero;
+        sphereCol.radius = fishInSightDistance;
+>>>>>>> 1693c6a32c26015ac7f769788a7070a3c55fea52
     }
     
     void Awake() {
@@ -44,6 +78,7 @@ public class AIBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+<<<<<<< HEAD
         //print($"big fish nearby: {bigFishNearby.Count}\tmedium nearby: {mediumFishNearby.Count}\tsmall fish nearby: {smallFishNearby.Count}\talgae nearby: {algaeNearby.Count}");
         //if (currentTarget != null)
         //    print($"closestTgt: {currentTarget.name}");
@@ -54,6 +89,8 @@ public class AIBehaviour : MonoBehaviour
         //print(DangerInSight());
         //print($"{FishInSight()}");
 
+=======
+>>>>>>> 1693c6a32c26015ac7f769788a7070a3c55fea52
         // ------------ WANDER (NEW - EXPERIMENTING)
 
         //if (targetPos == Vector3.zero){
@@ -69,7 +106,11 @@ public class AIBehaviour : MonoBehaviour
 
         // ------ END WANDER (NEW - EXPERIMENTING)
 
+<<<<<<< HEAD
         // ------------ WANDER (OLD - "WORKING")
+=======
+        // ------------ WANDER (OLD - WORKING)
+>>>>>>> 1693c6a32c26015ac7f769788a7070a3c55fea52
 
         //print($"hitWall? {hitWall}");
         //if (wanderTime > 0) {
@@ -87,6 +128,7 @@ public class AIBehaviour : MonoBehaviour
         //    Wander ();
         //}
 
+<<<<<<< HEAD
         // ------ END WANDER (OLD - "WORKING")
 
         // ------------ SEEK PURSUE
@@ -95,11 +137,23 @@ public class AIBehaviour : MonoBehaviour
             SeekPersueAction();
             //print("im see the bitch");
         }
+=======
+        // ------ END WANDER (OLD - WORKING)
+
+        // ------------ SEEK PURSUE
+
+        //if (FishInSight()){
+        //    SeekPersueAction();
+        //    print("im see the bitch");
+        //     
+        //}
+>>>>>>> 1693c6a32c26015ac7f769788a7070a3c55fea52
 
         // ------ END SEEK PURSUE
 
         // ------------ SEEK FLEE
 
+<<<<<<< HEAD
         if (currentDanger != null || DangerInSight()) {
             SeekFleeAction();
         }
@@ -114,6 +168,24 @@ public class AIBehaviour : MonoBehaviour
             gameArea.MaxVec.y - LimitPaddings.y);
         float targetZ = Random.Range(gameArea.MinVec.z + LimitPaddings.z,
             gameArea.MaxVec.z - LimitPaddings.z);
+=======
+        //if (FishInSight ()) {
+        //    SeekFleeAction();
+        //}
+
+        // ------ END SEEK FLEE
+
+        print($"{FishInSight()}");
+    }
+
+    private Vector3 WanderTargetPosition(){
+        float targetX = Random.Range(gameArea.MinVec.x + xLimitPadding,
+            gameArea.MaxVec.x - xLimitPadding);
+        float targetY = Random.Range(gameArea.MinVec.y + yLimitPadding,
+            gameArea.MaxVec.y - yLimitPadding);
+        float targetZ = Random.Range(gameArea.MinVec.z + zLimitPadding,
+            gameArea.MaxVec.z - zLimitPadding);
+>>>>>>> 1693c6a32c26015ac7f769788a7070a3c55fea52
 
         return new Vector3(targetX, targetY, targetZ);
     }
@@ -130,6 +202,7 @@ public class AIBehaviour : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
+<<<<<<< HEAD
         if (other.CompareTag("BigFish")) {
             bigFishNearby.Add(other.gameObject);
         }
@@ -170,6 +243,19 @@ public class AIBehaviour : MonoBehaviour
         else if (other.CompareTag("Wall")) {
             print("bye wall");
             hitWall = false;
+=======
+        if (other.CompareTag("MediumFish")) {
+            mediumFishTargets.Add((other.gameObject,
+                Vector3.Distance(transform.position, other.transform.position)));
+        }
+        else if (other.CompareTag("SmallFish")) {
+            smallFishTargets.Add((other.gameObject,
+                Vector3.Distance(transform.position, other.transform.position)));
+        }
+        else if (other.CompareTag("Algae")) {
+            algaeTargets.Add((other.gameObject,
+                Vector3.Distance(transform.position, other.transform.position)));
+>>>>>>> 1693c6a32c26015ac7f769788a7070a3c55fea52
         }
     }
 
@@ -186,8 +272,11 @@ public class AIBehaviour : MonoBehaviour
         r = Color.red;
         Gizmos.color = r;
         Gizmos.DrawSphere(targetPos, 10f);
+<<<<<<< HEAD
 
         Gizmos.DrawRay(transform.position, Vector3.right * 200f);
+=======
+>>>>>>> 1693c6a32c26015ac7f769788a7070a3c55fea52
     }
     
     // --------------------------WANDER MOVEMENT-------------------------------  //
@@ -200,6 +289,7 @@ public class AIBehaviour : MonoBehaviour
     // Check if fish is in sight
     private bool TargetInSight()
     {
+<<<<<<< HEAD
         if (currentTarget == null) {
 
             (GameObject obj, float dist) closestTgt =
@@ -243,23 +333,69 @@ public class AIBehaviour : MonoBehaviour
                             algaeNearby[i].transform.position);
                         if (dist < closestTgt.dist) {
                             closestTgt = (algaeNearby[i], dist);
+=======
+        if (targetFish == null) {
+
+            (GameObject obj, float dist) closestTgt =
+                (this.gameObject, float.PositiveInfinity);
+
+            // if bigfish calls this
+            if (this.CompareTag("BigFish")) {
+                if (mediumFishTargets.Count > 0) {
+                    for (int i = 0; i < mediumFishTargets.Count; i++) {
+                        if (mediumFishTargets[i].dist < closestTgt.dist) {
+                            closestTgt = mediumFishTargets[i];
+                        }
+                    }
+                }
+                else if (smallFishTargets.Count > 0) {
+                    for (int i = 0; i < smallFishTargets.Count; i++) {
+                        if (smallFishTargets[i].dist < closestTgt.dist) {
+                            closestTgt = mediumFishTargets[i];
+                        }
+                    }
+                }
+                else return false;
+            }
+            // if mediumfish calls this
+            else if (this.CompareTag("MediumFish")) {
+                if (smallFishTargets.Count > 0) {
+                    for (int i = 0; i < smallFishTargets.Count; i++) {
+                        if (smallFishTargets[i].dist < closestTgt.dist) {
+                            closestTgt = mediumFishTargets[i];
+                        }
+                    }
+                }
+                else if (algaeTargets.Count > 0) {
+                    for (int i = 0; i < algaeTargets.Count; i++) {
+                        if (algaeTargets[i].dist < closestTgt.dist) {
+                            closestTgt = algaeTargets[i];
+>>>>>>> 1693c6a32c26015ac7f769788a7070a3c55fea52
                         }
                     }
                 }
             }
             // if smallfish calls this
             else if (this.CompareTag("SmallFish")) {
+<<<<<<< HEAD
                 if (algaeNearby.Count > 0) {
                     for (int i = 0; i < algaeNearby.Count; i++) {
                         float dist = Vector3.Distance(transform.position,
                             algaeNearby[i].transform.position);
                         if (dist < closestTgt.dist) {
                             closestTgt = (algaeNearby[i], dist);
+=======
+                if (algaeTargets.Count > 0) {
+                    for (int i = 0; i < algaeTargets.Count; i++) {
+                        if (algaeTargets[i].dist < closestTgt.dist) {
+                            closestTgt = algaeTargets[i];
+>>>>>>> 1693c6a32c26015ac7f769788a7070a3c55fea52
                         }
                     }
                 }
             }
 
+<<<<<<< HEAD
             currentTarget = closestTgt.obj;
             if (currentTarget != null) return true;
         }
@@ -306,6 +442,12 @@ public class AIBehaviour : MonoBehaviour
             if (currentDanger != null) return true;
         }
 
+=======
+            targetFish = closestTgt.obj;
+            print($"closestTgt: {closestTgt.obj.name}");
+            return true;
+        }
+>>>>>>> 1693c6a32c26015ac7f769788a7070a3c55fea52
         return false;
     }
     

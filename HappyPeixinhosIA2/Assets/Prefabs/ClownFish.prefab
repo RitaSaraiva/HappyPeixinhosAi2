@@ -352,7 +352,10 @@ GameObject:
   - component: {fileID: 1488156050648878867}
   - component: {fileID: 5303076836852195726}
   - component: {fileID: 8901545371186780583}
+<<<<<<< HEAD
   - component: {fileID: -5370483755719185631}
+=======
+>>>>>>> 1693c6a32c26015ac7f769788a7070a3c55fea52
   m_Layer: 10
   m_Name: ClownFish
   m_TagString: SmallFish
@@ -432,6 +435,7 @@ MonoBehaviour:
   startEnergyVal: 0
   dangerList: 0300000002000000
   foodList: 00000000
+<<<<<<< HEAD
 --- !u!114 &-5370483755719185631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,6 +459,8 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   currentDanger: {fileID: 0}
   fishScript: {fileID: 0}
+=======
+>>>>>>> 1693c6a32c26015ac7f769788a7070a3c55fea52
 --- !u!1 &7629158748462406759
 GameObject:
   m_ObjectHideFlags: 0
