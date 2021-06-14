@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class Algae : MonoBehaviour, IFood
 {
@@ -17,12 +18,15 @@ public class Algae : MonoBehaviour, IFood
     
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("VerticalLimits")) {
-            RemoveAlgae();
+            StartCoroutine(RemoveAlgae());
         }
     }
 
-    public void RemoveAlgae() {
+    public IEnumerator RemoveAlgae() {
+        this.gameObject.SetActive(false);
+        yield return new WaitForEndOfFrame();
         GameObject.Destroy(this.gameObject);
         aiController.amountOfAlgae--;
     }
+
 }
