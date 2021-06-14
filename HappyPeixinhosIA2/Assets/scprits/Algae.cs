@@ -1,23 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Algae : MonoBehaviour, IFood
 {
-    [SerializeField] private float energyAsFood;
-    [SerializeField] private float floatUpSpeed;
-    public float energyvalue {get; set;}
+    private AIController aiController;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        energyvalue = energyAsFood;
+    public float energyvalue { get => aiController.algaeEnergeticValue; }
+
+    private void Awake() {
+        aiController = FindObjectOfType<AIController>();
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        transform.Translate(Vector3.up * floatUpSpeed * Time.deltaTime);
+    void Update() {
+        transform.Translate(Vector3.up * aiController.algaeSpeed * Time.deltaTime);
     }
     
     private void OnTriggerEnter(Collider other) {
@@ -28,5 +23,6 @@ public class Algae : MonoBehaviour, IFood
 
     public void RemoveAlgae() {
         GameObject.Destroy(this.gameObject);
+        aiController.amountOfAlgae--;
     }
 }

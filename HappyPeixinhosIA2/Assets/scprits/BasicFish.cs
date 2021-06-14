@@ -1,14 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public abstract class BasicFish : MonoBehaviour, IFish, IFood
 {
-
-    //Energia para reproduzir
-    [SerializeField] protected float energyToReproduce;
-
     //Energia que perde por segundo
     [SerializeField] private float energyPerSec;
 
@@ -16,21 +10,21 @@ public abstract class BasicFish : MonoBehaviour, IFish, IFood
     private float decayTimer;
 
     //Energia que dá quando é comido
-    public float energyvalue {get; set;}
+    public virtual float energyvalue { get; set; }
 
     //energia
-    public float energy {get; set;}
-    public float EnergyToReproduce { get => energyToReproduce; }
+    public float energy { get; set; }
+    public virtual float EnergyToReproduce { get; }
+    public bool dying;
 
-    private void Update() {
+    protected void Update() {
         EnergyDecay();
-        if (energy < 0) Death();
+        if (energy < 0 && !dying) StartCoroutine(Death());
     }
 
     //Reproduzir
-    public void Reproduce() {
+    public virtual void Reproduce() {
         energy /= 2;
-        print(energy);
         Instantiate(this);
     }
 
@@ -53,7 +47,13 @@ public abstract class BasicFish : MonoBehaviour, IFish, IFood
     }
 
     //morrer
-    public virtual void Death() {
+    public virtual IEnumerator Death() {
+        dying = true;
+        this.gameObject.SetActive(false);
+        yield return new WaitForEndOfFrame();
         GameObject.Destroy(this.gameObject);
+        OnDeath();
     }
+
+    protected abstract void OnDeath();
 }

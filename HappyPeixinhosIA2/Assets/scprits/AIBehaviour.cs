@@ -1,14 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using LibGameAI.DecisionTrees;
 
 public class AIBehaviour : MonoBehaviour
 {
-    // Reference to gamearea object
-    [SerializeField] private GameArea gameArea;
-    // Paddings on area limits
-    [SerializeField] private Vector3 LimitPaddings;
     [SerializeField] private Vector3 targetPos;
 
     // Speed of AI agent movement
@@ -31,10 +26,29 @@ public class AIBehaviour : MonoBehaviour
 
     private IDecisionTreeNode rootCanSeeFood;
 
+    [SerializeField] private AIController aiController;
+    [SerializeField] private GameArea gameArea;
+
+    public float BigFishSpeed { get => aiController.bigFishSpeed; }
+    public float MediumFishSpeed { get => aiController.mediumFishSpeed; }
+    public float SmallFishSpeed { get => aiController.smallFishSpeed; }
+
     //--------------------------------------------------------------------//
 
     private void Start() {
         sphereCol.radius = targetInSightDistance;
+
+        switch (this.tag) {
+            case "BigFish":
+                movementSpeed = aiController.bigFishSpeed;
+                break;
+            case "MediumFish":
+                movementSpeed = aiController.bigFishSpeed;
+                break;
+            case "SmallFish":
+                movementSpeed = aiController.bigFishSpeed;
+                break;
+        }
 
         // Create decision tree nodes
         IDecisionTreeNode wander = new ActionNode(WanderAction);
@@ -53,6 +67,7 @@ public class AIBehaviour : MonoBehaviour
         fishScript = GetComponent<BasicFish>();
         gameArea = FindObjectOfType<GameArea>();
         sphereCol = GetComponent<SphereCollider>();
+        aiController = FindObjectOfType<AIController>();
     }
     
     // Update is called once per frame
@@ -69,7 +84,7 @@ public class AIBehaviour : MonoBehaviour
     private void WanderAction() {
         if (targetPos == Vector3.zero)
         {
-            targetPos = WanderTargetPosition();
+            targetPos = aiController.RandomPosition();
         }
         else
         {
@@ -85,7 +100,6 @@ public class AIBehaviour : MonoBehaviour
         if (currentTarget != null)
         {
             PursueAction();
-            print("im see the bitch");
         }
     }
 
@@ -94,17 +108,6 @@ public class AIBehaviour : MonoBehaviour
         {
             FleeAction();
         }
-    }
-
-    private Vector3 WanderTargetPosition(){
-        float targetX = Random.Range(gameArea.MinVec.x + LimitPaddings.x,
-            gameArea.MaxVec.x - LimitPaddings.x);
-        float targetY = Random.Range(gameArea.MinVec.y + LimitPaddings.y,
-            gameArea.MaxVec.y - LimitPaddings.y);
-        float targetZ = Random.Range(gameArea.MinVec.z + LimitPaddings.z,
-            gameArea.MaxVec.z - LimitPaddings.z);
-
-        return new Vector3(targetX, targetY, targetZ);
     }
 
     //Rotate the NPC to face new waypoint
@@ -252,6 +255,7 @@ public class AIBehaviour : MonoBehaviour
             if (this.CompareTag("MediumFish")) {
                 if (bigFishNearby.Count > 0) {
                     for (int i = 0; i < bigFishNearby.Count; i++) {
+                        if (bigFishNearby[i] == null) continue;
                         float dangerDist = Vector3.Distance(transform.position, 
                             bigFishNearby[i].transform.position);
                         if (dangerDist < closestDanger.dist) {
@@ -263,6 +267,7 @@ public class AIBehaviour : MonoBehaviour
             else if (this.CompareTag("SmallFish")) {
                 if (bigFishNearby.Count > 0) {
                     for (int i = 0; i < bigFishNearby.Count; i++) {
+                        if (bigFishNearby[i] == null) continue;
                         float dangerDist = Vector3.Distance(transform.position, 
                             bigFishNearby[i].transform.position);
                         if (dangerDist < closestDanger.dist) {
@@ -272,6 +277,7 @@ public class AIBehaviour : MonoBehaviour
                 }
                 else if (mediumFishNearby.Count > 0) {
                     for (int i = 0; i < mediumFishNearby.Count; i++) {
+                        if (mediumFishNearby[i] == null) continue;
                         float dangerDist = Vector3.Distance(transform.position, 
                             mediumFishNearby[i].transform.position);
                         if (dangerDist < closestDanger.dist) {
@@ -317,28 +323,28 @@ public class AIBehaviour : MonoBehaviour
         Vector3 vel = (transform.position - targetPos).normalized * movementSpeed * Time.deltaTime;
         Vector3 nextPos = transform.position + vel;
         // calcular a distancia do vidro e distancia do tubarão e calcular o angulo de 90 em relação ao tubarão
-        if (nextPos.x > gameArea.MaxVec.x - LimitPaddings.x) {
-            print("x limit hit");
+        if (nextPos.x > gameArea.MaxVec.x - aiController.LimitPaddings.x) {
+            //print("x limit hit");
             vel = new Vector3(vel.x * -0.15f, vel.y, vel.z);
         }
-        if (nextPos.y > gameArea.MaxVec.y - LimitPaddings.y) {
-            print("y limit hit");
+        if (nextPos.y > gameArea.MaxVec.y - aiController.LimitPaddings.y) {
+            //print("y limit hit");
             vel = new Vector3(vel.x, vel.y * -0.15f, vel.z);
         }
-        if (nextPos.z > gameArea.MaxVec.z - LimitPaddings.z) {
-            print("z limit hit");
+        if (nextPos.z > gameArea.MaxVec.z - aiController.LimitPaddings.z) {
+            //print("z limit hit");
             vel = new Vector3(vel.x, vel.y, vel.z * -0.15f);
         }
-        if (nextPos.x < gameArea.MinVec.x + LimitPaddings.x) {
-            print("x limit hit");
+        if (nextPos.x < gameArea.MinVec.x + aiController.LimitPaddings.x) {
+            //print("x limit hit");
             vel = new Vector3(vel.x * -0.50f, vel.y, vel.z);
         }
-        if (nextPos.y < gameArea.MinVec.y + LimitPaddings.y) {
-            print("y limit hit");
+        if (nextPos.y < gameArea.MinVec.y + aiController.LimitPaddings.y) {
+            //print("y limit hit");
             vel = new Vector3(vel.x, vel.y * 0.15f, vel.z);
         }
-        if (nextPos.z < gameArea.MinVec.z + LimitPaddings.z) {
-            print("z limit hit");
+        if (nextPos.z < gameArea.MinVec.z + aiController.LimitPaddings.z) {
+            //print("z limit hit");
             vel = new Vector3(vel.x, vel.y, vel.z * 0.15f);
         }
         
@@ -352,17 +358,14 @@ public class AIBehaviour : MonoBehaviour
         float dist = Vector3.Distance(transform.position,
             currentTarget.transform.position);
         if (currentTarget != null && dist < targetInEatingDistance) {
-            print("can eat");
             canEatTarget = true;
             return true;
         }
-        print("cant eat");
         canEatTarget = false;
         return false;
     }
 
     private void EatTarget() {
-        print(canEatTarget);
         if (canEatTarget) {
             BasicFish tgt = null;
             Algae algaeTgt = null;
@@ -381,7 +384,7 @@ public class AIBehaviour : MonoBehaviour
                         break;
                 }
                 currentTarget = null;
-                if (tgt != null) tgt.Death();
+                if (tgt != null && !tgt.dying) StartCoroutine(tgt.Death());
                 else if (algaeTgt != null) algaeTgt.RemoveAlgae();
                 canEatTarget = false;
             }
@@ -389,7 +392,7 @@ public class AIBehaviour : MonoBehaviour
     }
 
     private bool CanReproduce() {
-        if (fishScript.energy > fishScript.EnergyToReproduce) return true;
+        if (this.gameObject.activeSelf && fishScript.energy > fishScript.EnergyToReproduce) return true;
         return false;
     }
 }

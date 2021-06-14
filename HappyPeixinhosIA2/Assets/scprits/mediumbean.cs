@@ -1,18 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class mediumbean : BasicFish
 {
-    
-    [SerializeField] private float energyAsFood;
-    [SerializeField] private float startEnergyVal;
+    private AIController aiController;
+    public override float energyvalue { get => aiController.mediumFishEnergeticValue; }
+    public float startEnergyVal { get => aiController.mediumFishStartEnergy; }
+    public override float EnergyToReproduce { get => aiController.mediumFishReproduceEnergy; }
 
+    private void Awake()
+    {
+        aiController = FindObjectOfType<AIController>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        energyvalue = energyAsFood;
         energy = startEnergyVal;
+        aiController.amountOfMediumFishes++;
+    }
+
+    protected override void OnDeath()
+    {
+        aiController.amountOfMediumFishes--;
     }
 }

@@ -11,14 +11,14 @@ public class GameArea : MonoBehaviour
 
     private void Awake() {
         col = GetComponent<BoxCollider>();
+        colBounds = col.bounds;
+        MaxVec = new Vector3(col.bounds.max.x, col.bounds.max.y, col.bounds.max.z);
+        MinVec = new Vector3(col.bounds.min.x, col.bounds.min.y, col.bounds.min.z);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        colBounds = col.bounds;
-        MaxVec = new Vector3(col.bounds.max.x, col.bounds.max.y, col.bounds.max.z);
-        MinVec = new Vector3(col.bounds.min.x, col.bounds.min.y, col.bounds.min.z);
     }
 
     // Update is called once per frame

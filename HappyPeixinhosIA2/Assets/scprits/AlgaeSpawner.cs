@@ -1,24 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AlgaeSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject algaePrefab;
-    [Range(0,1)]
-    [SerializeField] private float spawnChance;
+    private float spawnChance;
     private BoxCollider boxCol;
     private float spawnTimer;
     private Vector3 LimitsMin;
     private Vector3 LimitsMax;
+    private AIController aiController;
     // Start is called before the first frame update
 
     private void Awake() {
         boxCol = GetComponent<BoxCollider>();
+        aiController = FindObjectOfType<AIController>();
     }
 
     void Start()
     {
+        spawnChance = aiController.algaeSpawnChance;
         LimitsMin = boxCol.bounds.min;
         LimitsMax = boxCol.bounds.max;
         spawnTimer = 1f;
@@ -34,6 +34,7 @@ public class AlgaeSpawner : MonoBehaviour
             if (Random.Range(0f, 1f) < spawnChance) {
                 GameObject spawnedAlgae = Instantiate(algaePrefab);
                 spawnedAlgae.transform.position = RandomTilePosition();
+                aiController.amountOfAlgae++;
             }
             spawnTimer = 1;
         }
