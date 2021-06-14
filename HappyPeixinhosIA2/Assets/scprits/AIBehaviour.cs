@@ -58,8 +58,9 @@ public class AIBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //print($"algae targets: {smallFishNearby.Count}");
         //print($"algae targets: {algaeNearby.Count}");
-        print(fishScript.energy);
+        //print(fishScript.energy);
 
         ActionNode actionNode = rootCanSeeFood.MakeDecision() as ActionNode;
         actionNode.Execute();

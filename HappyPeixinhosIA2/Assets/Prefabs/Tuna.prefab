@@ -497,7 +497,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5757707622323086241}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 3.56
@@ -518,8 +518,6 @@ MonoBehaviour:
   energyPerSec: 1
   energyAsFood: 10
   startEnergyVal: 20
-  dangerList: 03000000
-  foodList: 0100000000000000
 --- !u!114 &-7140691466774178951
 MonoBehaviour:
   m_ObjectHideFlags: 0
