@@ -19,7 +19,7 @@ public abstract class BasicFish : MonoBehaviour, IFish, IFood
 
     protected void Update() {
         EnergyDecay();
-        if (energy < 0 && !dying) StartCoroutine(Death());
+        if (energy < 0 && !dying) Death();
     }
 
     //Reproduzir
@@ -47,13 +47,17 @@ public abstract class BasicFish : MonoBehaviour, IFish, IFood
     }
 
     //morrer
-    public virtual IEnumerator Death() {
+    public virtual void Death() {
         dying = true;
-        this.gameObject.SetActive(false);
-        yield return new WaitForEndOfFrame();
-        GameObject.Destroy(this.gameObject);
         OnDeath();
+        this.gameObject.SetActive(false);
     }
 
     protected abstract void OnDeath();
+
+    private void OnDisable()
+    {
+        GameObject.Destroy(this.gameObject);
+    }
+
 }

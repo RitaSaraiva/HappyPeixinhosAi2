@@ -18,15 +18,16 @@ public class Algae : MonoBehaviour, IFood
     
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("VerticalLimits")) {
-            StartCoroutine(RemoveAlgae());
+            RemoveAlgae();
         }
     }
 
-    public IEnumerator RemoveAlgae() {
-        this.gameObject.SetActive(false);
-        yield return new WaitForEndOfFrame();
-        GameObject.Destroy(this.gameObject);
+    public void RemoveAlgae() {
         aiController.amountOfAlgae--;
+        this.gameObject.SetActive(false);
     }
 
+    private void OnDisable() {
+        GameObject.Destroy(this.gameObject);
+    }
 }

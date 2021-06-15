@@ -408,7 +408,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.09, y: 0.20821553, z: 0.510695}
+  m_Size: {x: 0.05, y: 0.20821553, z: 0.45}
   m_Center: {x: 0, y: 0.03558585, z: -0.02668935}
 --- !u!114 &8901545371186780583
 MonoBehaviour:
@@ -422,12 +422,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48ec7f73b84811542af60c3f51e77016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyToReproduce: 25
   energyPerSec: 1
-  energyAsFood: 5
-  startEnergyVal: 10
-  dangerList: 0300000002000000
-  foodList: 00000000
+  dying: 0
 --- !u!114 &-5370483755719185631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,15 +436,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b03847e9c5ec6644ba8a7be54ab7a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameArea: {fileID: 0}
-  LimitPaddings: {x: 50, y: 10, z: 50}
   targetPos: {x: 0, y: 0, z: 0}
   movementSpeed: 60
-  targetInSightDistance: 7.5
-  targetInEatingDistance: 4
+  targetInSightDistance: 2.25
+  targetInEatingDistance: 20.6
   currentTarget: {fileID: 0}
   currentDanger: {fileID: 0}
   fishScript: {fileID: 0}
+  aiController: {fileID: 0}
+  gameArea: {fileID: 0}
 --- !u!54 &961510902546590781
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -461,7 +457,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
@@ -476,7 +472,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.44
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7629158748462406759
 GameObject:

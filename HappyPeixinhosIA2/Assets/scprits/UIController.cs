@@ -7,12 +7,18 @@ public class UIController : MonoBehaviour
     private Image smallFishBar;
     private Image mediumFishBar;
     private Image bigFishBar;
+    private Text algaeText;
+    private Text smallFishText;
+    private Text mediumFishText;
+    private Text bigFishText;
 
     private AIController aiController;
 
     private void Awake() {
         aiController = FindObjectOfType<AIController>();
         Image[] bars = GetComponentsInChildren<Image>();
+        Text[] texts = GetComponentsInChildren<Text>();
+
         for (int i = 0; i < bars.Length; i++) {
             switch (bars[i].name) {
                 case "algaeBar":
@@ -26,6 +32,23 @@ public class UIController : MonoBehaviour
                     break;
                 case "bigFishBar":
                     bigFishBar = bars[i];
+                    break;
+            }
+        }
+
+        for (int i = 0; i < texts.Length; i++) {
+            switch (texts[i].name) {
+                case "algaeText":
+                    algaeText = texts[i];
+                    break;
+                case "smallFishText":
+                    smallFishText = texts[i];
+                    break;
+                case "mediumFishText":
+                    mediumFishText = texts[i];
+                    break;
+                case "bigFishText":
+                    bigFishText = texts[i];
                     break;
             }
         }
@@ -60,5 +83,10 @@ public class UIController : MonoBehaviour
         if (aiController.amountOfBigFishes > 0) newBigFishScale = (float)aiController.amountOfBigFishes / totalAgents;
         else newBigFishScale = 0;
         bigFishBar.transform.localScale = new Vector3(bigFishBar.transform.localScale.x, newBigFishScale, bigFishBar.transform.localScale.z);
+
+        algaeText.text = $"Algae: {aiController.amountOfAlgae}";
+        smallFishText.text = $"Small fish: {aiController.amountOfSmallFishes}";
+        mediumFishText.text = $"Medium fish: {aiController.amountOfMediumFishes}";
+        bigFishText.text = $"Big fish: {aiController.amountOfBigFishes}";
     }
 }

@@ -36,6 +36,8 @@ public class AIBehaviour : MonoBehaviour
     //--------------------------------------------------------------------//
 
     private void Start() {
+        targetPos = aiController.RandomPosition();
+
         sphereCol.radius = targetInSightDistance;
 
         switch (this.tag) {
@@ -384,7 +386,7 @@ public class AIBehaviour : MonoBehaviour
                         break;
                 }
                 currentTarget = null;
-                if (tgt != null && !tgt.dying) StartCoroutine(tgt.Death());
+                if (tgt != null && !tgt.dying) tgt.Death();
                 else if (algaeTgt != null) algaeTgt.RemoveAlgae();
                 canEatTarget = false;
             }
