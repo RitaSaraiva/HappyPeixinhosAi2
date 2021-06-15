@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
+    // populaçao
     private Image algaeBar;
     private Image smallFishBar;
     private Image mediumFishBar;
@@ -12,13 +13,22 @@ public class UIController : MonoBehaviour
     private Text mediumFishText;
     private Text bigFishText;
 
+    // mostrar valores
+    private Text algaeSpeedDisplay;
+
     private AIController aiController;
+
+    private Image[] bars;
+    private Text[] texts;
 
     private void Awake() {
         aiController = FindObjectOfType<AIController>();
-        Image[] bars = GetComponentsInChildren<Image>();
-        Text[] texts = GetComponentsInChildren<Text>();
+        bars = GetComponentsInChildren<Image>();
+        texts = GetComponentsInChildren<Text>();
+    }
 
+    // Start is called before the first frame update
+    void Start() {
         for (int i = 0; i < bars.Length; i++) {
             switch (bars[i].name) {
                 case "algaeBar":
@@ -54,11 +64,6 @@ public class UIController : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start() {
-        
-    }
-
     // Update is called once per frame
     void Update() {
         // calculate total amount of agents
@@ -88,5 +93,239 @@ public class UIController : MonoBehaviour
         smallFishText.text = $"Small fish: {aiController.amountOfSmallFishes}";
         mediumFishText.text = $"Medium fish: {aiController.amountOfMediumFishes}";
         bigFishText.text = $"Big fish: {aiController.amountOfBigFishes}";
+    }
+
+    public void AlgaeSpeedChange() {
+        float newSpeed;
+        for (int i = 0; i < texts.Length; i++) {
+            if (texts[i].transform.parent.name == "algaeSpeedInput" && texts[i].name == "Text") {
+                if (float.TryParse(texts[i].text, out newSpeed)) {
+                    if (newSpeed < 0) {
+                        texts[i].text = $"{aiController.algaeSpeed}";
+                        return;
+                    }
+                    aiController.algaeSpeed = newSpeed;
+                    break;
+                }
+            }
+        }
+    }
+
+    public void AlgaeSpawnChanceChange() {
+        float newChance;
+        for (int i = 0; i < texts.Length; i++) {
+            if (texts[i].transform.parent.name == "algaeSpawnChanceInput" && texts[i].name == "Text") {
+                char[] inputArray = texts[i].text.ToCharArray();
+                string input = "";
+                for (int j = 0; j < texts[i].text.Length; j++) {
+                    if (texts[i].text[j] == '.') inputArray[j] = ',';
+                    input = new string(inputArray);
+                }
+                if (float.TryParse(input, out newChance)) {
+                    if (newChance < 0) {
+                        newChance = 0;
+                        texts[i].text = $"{newChance}";
+                    }
+                    else if (newChance > 1) {
+                        newChance = 1;
+                        texts[i].text = $"{newChance}";
+                    }
+                    aiController.algaeSpawnChance = newChance;
+                    break;
+                }
+            }
+        }
+    }
+
+    public void SmallFishSpeedChange() {
+        float newSpeed;
+        for (int i = 0; i < texts.Length; i++) {
+            if (texts[i].transform.parent.name == "smallFishSpeedInput" && texts[i].name == "Text") {
+                if (float.TryParse(texts[i].text, out newSpeed)) {
+                    if (newSpeed < 0) {
+                        texts[i].text = $"{aiController.smallFishSpeed}";
+                        return;
+                    }
+                    aiController.smallFishSpeed = newSpeed;
+                    break;
+                }
+            }
+        }
+    }
+
+    public void MediumFishSpeedChange() {
+        float newSpeed;
+        for (int i = 0; i < texts.Length; i++) {
+            if (texts[i].transform.parent.name == "mediumFishSpeedInput" && texts[i].name == "Text") {
+                if (float.TryParse(texts[i].text, out newSpeed)) {
+                    if (newSpeed < 0) {
+                        texts[i].text = $"{aiController.mediumFishSpeed}";
+                        return;
+                    }
+                    aiController.mediumFishSpeed = newSpeed;
+                    break;
+                }
+            }
+        }
+    }
+
+    public void BigFishSpeedChange() {
+        float newSpeed;
+        for (int i = 0; i < texts.Length; i++) {
+            if (texts[i].transform.parent.name == "bigFishSpeedInput" && texts[i].name == "Text") {
+                if (float.TryParse(texts[i].text, out newSpeed)) {
+                    if (newSpeed < 0) {
+                        texts[i].text = $"{aiController.bigFishSpeed}";
+                        return;
+                    }
+                    aiController.bigFishSpeed = newSpeed;
+                    break;
+                }
+            }
+        }
+    }
+
+    public void AlgaeEnergyValueChange() {
+        float newEnergyValue;
+        for (int i = 0; i < texts.Length; i++) {
+            if (texts[i].transform.parent.name == "algaeEnergyValueInput" && texts[i].name == "Text") {
+                if (float.TryParse(texts[i].text, out newEnergyValue)) {
+                    if (newEnergyValue < 0) {
+                        texts[i].text = $"{aiController.algaeEnergeticValue}";
+                        return;
+                    }
+                    aiController.algaeEnergeticValue = newEnergyValue;
+                    break;
+                }
+            }
+        }
+    }
+
+    public void SmallFishEnergyValueChange() {
+        float newEnergyValue;
+        for (int i = 0; i < texts.Length; i++) {
+            if (texts[i].transform.parent.name == "smallFishEnergyValueInput" && texts[i].name == "Text") {
+                if (float.TryParse(texts[i].text, out newEnergyValue)) {
+                    if (newEnergyValue < 0) {
+                        texts[i].text = $"{aiController.smallFishEnergeticValue}";
+                        return;
+                    }
+                    aiController.smallFishEnergeticValue = newEnergyValue;
+                    break;
+                }
+            }
+        }
+    }
+
+    public void MediumFishEnergyValueChange() {
+        float newEnergyValue;
+        for (int i = 0; i < texts.Length; i++) {
+            if (texts[i].transform.parent.name == "mediumFishEnergyValueInput" && texts[i].name == "Text") {
+                if (float.TryParse(texts[i].text, out newEnergyValue)) {
+                    if (newEnergyValue < 0) {
+                        texts[i].text = $"{aiController.mediumFishEnergeticValue}";
+                        return;
+                    }
+                    aiController.mediumFishEnergeticValue = newEnergyValue;
+                    break;
+                }
+            }
+        }
+    }
+
+    public void SmallFishStartEnergyChange() {
+        float newEnergyValue;
+        for (int i = 0; i < texts.Length; i++) {
+            if (texts[i].transform.parent.name == "smallFishStartEnergyInput" && texts[i].name == "Text") {
+                if (float.TryParse(texts[i].text, out newEnergyValue)) {
+                    if (newEnergyValue < 0) {
+                        texts[i].text = $"{aiController.smallFishStartEnergy}";
+                        return;
+                    }
+                    aiController.smallFishStartEnergy = newEnergyValue;
+                    break;
+                }
+            }
+        }
+    }
+
+    public void MediumFishStartEnergyChange() {
+        float newEnergyValue;
+        for (int i = 0; i < texts.Length; i++) {
+            if (texts[i].transform.parent.name == "mediumFishStartEnergyInput" && texts[i].name == "Text") {
+                if (float.TryParse(texts[i].text, out newEnergyValue)) {
+                    if (newEnergyValue < 0) {
+                        texts[i].text = $"{aiController.mediumFishStartEnergy}";
+                        return;
+                    }
+                    aiController.mediumFishStartEnergy = newEnergyValue;
+                    break;
+                }
+            }
+        }
+    }
+
+    public void BigFishStartEnergyChange() {
+        float newEnergyValue;
+        for (int i = 0; i < texts.Length; i++) {
+            if (texts[i].transform.parent.name == "bigFishStartEnergyInput" && texts[i].name == "Text") {
+                if (float.TryParse(texts[i].text, out newEnergyValue)) {
+                    if (newEnergyValue < 0) {
+                        texts[i].text = $"{aiController.bigFishStartEnergy}";
+                        return;
+                    }
+                    aiController.bigFishStartEnergy = newEnergyValue;
+                    break;
+                }
+            }
+        }
+    }
+
+    public void SmallFishReproduceEnergyChange() {
+        float newEnergyValue;
+        for (int i = 0; i < texts.Length; i++) {
+            if (texts[i].transform.parent.name == "smallFishReproduceEnergyInput" && texts[i].name == "Text") {
+                if (float.TryParse(texts[i].text, out newEnergyValue)) {
+                    if (newEnergyValue < 0) {
+                        texts[i].text = $"{aiController.smallFishReproduceEnergy}";
+                        return;
+                    }
+                    aiController.smallFishReproduceEnergy = newEnergyValue;
+                    break;
+                }
+            }
+        }
+    }
+
+    public void MediumFishReproduceEnergyChange() {
+        float newEnergyValue;
+        for (int i = 0; i < texts.Length; i++) {
+            if (texts[i].transform.parent.name == "mediumFishReproduceEnergyInput" && texts[i].name == "Text") {
+                if (float.TryParse(texts[i].text, out newEnergyValue)) {
+                    if (newEnergyValue < 0) {
+                        texts[i].text = $"{aiController.mediumFishReproduceEnergy}";
+                        return;
+                    }
+                    aiController.mediumFishReproduceEnergy = newEnergyValue;
+                    break;
+                }
+            }
+        }
+    }
+
+    public void BigFishReproduceEnergyChange() {
+        float newEnergyValue;
+        for (int i = 0; i < texts.Length; i++) {
+            if (texts[i].transform.parent.name == "bigFishReproduceEnergyInput" && texts[i].name == "Text") {
+                if (float.TryParse(texts[i].text, out newEnergyValue)) {
+                    if (newEnergyValue < 0) {
+                        texts[i].text = $"{aiController.bigFishReproduceEnergy}";
+                        return;
+                    }
+                    aiController.bigFishReproduceEnergy = newEnergyValue;
+                    break;
+                }
+            }
+        }
     }
 }

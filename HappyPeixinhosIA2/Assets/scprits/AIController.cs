@@ -35,9 +35,7 @@ public class AIController : MonoBehaviour
     public int initialSmallFishes;
     public int initialMediumFishes;
     public int initialBigFishes;
-    [Header("General AI Control")]
-    public float TargetInSightDistance;
-    public float EnemyInSightDistance;
+
     public Vector3 LimitPaddings;
 
 

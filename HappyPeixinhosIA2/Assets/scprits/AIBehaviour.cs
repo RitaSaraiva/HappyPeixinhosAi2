@@ -40,18 +40,6 @@ public class AIBehaviour : MonoBehaviour
 
         sphereCol.radius = targetInSightDistance;
 
-        switch (this.tag) {
-            case "BigFish":
-                movementSpeed = aiController.bigFishSpeed;
-                break;
-            case "MediumFish":
-                movementSpeed = aiController.bigFishSpeed;
-                break;
-            case "SmallFish":
-                movementSpeed = aiController.bigFishSpeed;
-                break;
-        }
-
         // Create decision tree nodes
         IDecisionTreeNode wander = new ActionNode(WanderAction);
         IDecisionTreeNode seekPursue = new ActionNode(SeekPursueAction);
@@ -90,6 +78,18 @@ public class AIBehaviour : MonoBehaviour
         }
         else
         {
+            switch (this.tag)
+            {
+                case "BigFish":
+                    movementSpeed = aiController.bigFishSpeed;
+                    break;
+                case "MediumFish":
+                    movementSpeed = aiController.mediumFishSpeed;
+                    break;
+                case "SmallFish":
+                    movementSpeed = aiController.smallFishSpeed;
+                    break;
+            }
             RotateNPC(targetPos, movementSpeed * Time.deltaTime);
             transform.position = Vector3.MoveTowards(transform.position,
                 targetPos, movementSpeed * Time.deltaTime);
@@ -312,6 +312,18 @@ public class AIBehaviour : MonoBehaviour
     // --------------------------PERSUE MOVEMENT-------------------------------  //
     private void MoveTowardsTarget(Vector3 targetPos)
     {
+        switch (this.tag)
+        {
+            case "BigFish":
+                movementSpeed = aiController.bigFishSpeed;
+                break;
+            case "MediumFish":
+                movementSpeed = aiController.mediumFishSpeed;
+                break;
+            case "SmallFish":
+                movementSpeed = aiController.smallFishSpeed;
+                break;
+        }
         // Move towards the target  at the calculated velocity
         transform.LookAt(currentTarget.transform);
         transform.position = Vector3.MoveTowards(transform.position, 
@@ -322,6 +334,18 @@ public class AIBehaviour : MonoBehaviour
     // --------------------------FLEE MOVEMENT-------------------------------  //
     private void MoveAwayTarget(Vector3 targetPos)
     {
+        switch (this.tag)
+        {
+            case "BigFish":
+                movementSpeed = aiController.bigFishSpeed;
+                break;
+            case "MediumFish":
+                movementSpeed = aiController.mediumFishSpeed;
+                break;
+            case "SmallFish":
+                movementSpeed = aiController.smallFishSpeed;
+                break;
+        }
         Vector3 vel = (transform.position - targetPos).normalized * movementSpeed * Time.deltaTime;
         Vector3 nextPos = transform.position + vel;
         // calcular a distancia do vidro e distancia do tubarão e calcular o angulo de 90 em relação ao tubarão

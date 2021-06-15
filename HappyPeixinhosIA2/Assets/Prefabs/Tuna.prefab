@@ -530,7 +530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPos: {x: 0, y: 0, z: 0}
   movementSpeed: 55
-  targetInSightDistance: 2.5
+  targetInSightDistance: 3
   targetInEatingDistance: 39.84
   currentTarget: {fileID: 0}
   currentDanger: {fileID: 0}
