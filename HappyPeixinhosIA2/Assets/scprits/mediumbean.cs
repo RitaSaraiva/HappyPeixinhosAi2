@@ -16,11 +16,13 @@ public class mediumbean : BasicFish
     void Start()
     {
         energy = startEnergyVal;
+        //increases medium fish count 
         aiController.amountOfMediumFishes++;
     }
 
     protected override void OnDeath()
     {
+        //decreases the medium fish count
         aiController.amountOfMediumFishes--;
     }
 }

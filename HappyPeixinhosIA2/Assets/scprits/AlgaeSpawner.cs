@@ -27,6 +27,8 @@ public class AlgaeSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //timer that spawns an algae with a chance each second at a random position
+        //in the tile
         if (spawnTimer > 0) {
             spawnTimer -= Time.deltaTime;
         }
@@ -40,6 +42,7 @@ public class AlgaeSpawner : MonoBehaviour
         }
     }
 
+    //return random position within tile that calls it
     private Vector3 RandomTilePosition() {
         return new Vector3(Random.Range(LimitsMin.x, LimitsMax.x), LimitsMin.y, Random.Range(LimitsMin.z, LimitsMax.z));
     }

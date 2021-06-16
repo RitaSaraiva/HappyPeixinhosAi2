@@ -49,6 +49,7 @@ public class AIController : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         GameObject newFish;
+        //for cycles to spawn initial fishes
         for (int i = 0; i < initialSmallFishes; i++) {
             newFish = Instantiate(smallFishPrefab);
             newFish.transform.position = RandomPosition();
@@ -63,12 +64,8 @@ public class AIController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update() {
-        
-    }
-
     public Vector3 RandomPosition() {
+        //creates a random position in the game area and returns it
         float targetX = Random.Range(gameArea.MinVec.x + LimitPaddings.x,
             gameArea.MaxVec.x - LimitPaddings.x);
         float targetY = Random.Range(gameArea.MinVec.y + LimitPaddings.y,

@@ -1,5 +1,5 @@
 public interface IFish
 {
-    //energia
+    //Energy
     float energy {get; set;}
 }

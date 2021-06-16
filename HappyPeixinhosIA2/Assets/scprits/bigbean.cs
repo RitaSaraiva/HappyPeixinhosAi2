@@ -15,11 +15,13 @@ public class bigbean : BasicFish
     // Start is called before the first frame update
     void Start() {
         energy = startEnergyVal;
+        //increases big fish count 
         aiController.amountOfBigFishes++;
     }
 
     protected override void OnDeath()
     {
+        //decreases the big fish count
         aiController.amountOfBigFishes--;
     }
 }

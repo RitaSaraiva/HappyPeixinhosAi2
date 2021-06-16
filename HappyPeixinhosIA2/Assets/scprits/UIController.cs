@@ -29,6 +29,7 @@ public class UIController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
+        //for cycle that assigns the necessary bars from the images found
         for (int i = 0; i < bars.Length; i++) {
             switch (bars[i].name) {
                 case "algaeBar":
@@ -46,6 +47,7 @@ public class UIController : MonoBehaviour
             }
         }
 
+        //for cycle that assigns the necessary texts from the texts found
         for (int i = 0; i < texts.Length; i++) {
             switch (texts[i].name) {
                 case "algaeText":
@@ -97,6 +99,8 @@ public class UIController : MonoBehaviour
 
     public void AlgaeSpeedChange() {
         float newSpeed;
+        //for cycle that finds the algae speed change input and changes the value
+        //according to it if its bigger that 0
         for (int i = 0; i < texts.Length; i++) {
             if (texts[i].transform.parent.name == "algaeSpeedInput" && texts[i].name == "Text") {
                 if (float.TryParse(texts[i].text, out newSpeed)) {
@@ -113,6 +117,8 @@ public class UIController : MonoBehaviour
 
     public void AlgaeSpawnChanceChange() {
         float newChance;
+        //for cycle that finds the algae chance input and changes the value
+        //according to it if its bigger that 0 and small that 1
         for (int i = 0; i < texts.Length; i++) {
             if (texts[i].transform.parent.name == "algaeSpawnChanceInput" && texts[i].name == "Text") {
                 char[] inputArray = texts[i].text.ToCharArray();
@@ -139,6 +145,8 @@ public class UIController : MonoBehaviour
 
     public void SmallFishSpeedChange() {
         float newSpeed;
+        //for cycle that finds the small fish speed change input and changes the value
+        //according to it if its bigger that 0
         for (int i = 0; i < texts.Length; i++) {
             if (texts[i].transform.parent.name == "smallFishSpeedInput" && texts[i].name == "Text") {
                 if (float.TryParse(texts[i].text, out newSpeed)) {
@@ -155,6 +163,8 @@ public class UIController : MonoBehaviour
 
     public void MediumFishSpeedChange() {
         float newSpeed;
+        //for cycle that finds the medium fish speed change input and changes the value
+        //according to it if its bigger that 0
         for (int i = 0; i < texts.Length; i++) {
             if (texts[i].transform.parent.name == "mediumFishSpeedInput" && texts[i].name == "Text") {
                 if (float.TryParse(texts[i].text, out newSpeed)) {
@@ -171,6 +181,8 @@ public class UIController : MonoBehaviour
 
     public void BigFishSpeedChange() {
         float newSpeed;
+        //for cycle that finds the big fish speed change input and changes the value
+        //according to it if its bigger that 0
         for (int i = 0; i < texts.Length; i++) {
             if (texts[i].transform.parent.name == "bigFishSpeedInput" && texts[i].name == "Text") {
                 if (float.TryParse(texts[i].text, out newSpeed)) {
@@ -187,6 +199,8 @@ public class UIController : MonoBehaviour
 
     public void AlgaeEnergyValueChange() {
         float newEnergyValue;
+        //for cycle that finds the algae energy value change input and changes the value
+        //according to it if its bigger that 0
         for (int i = 0; i < texts.Length; i++) {
             if (texts[i].transform.parent.name == "algaeEnergyValueInput" && texts[i].name == "Text") {
                 if (float.TryParse(texts[i].text, out newEnergyValue)) {
@@ -203,6 +217,8 @@ public class UIController : MonoBehaviour
 
     public void SmallFishEnergyValueChange() {
         float newEnergyValue;
+        //for cycle that finds the small fish energy value change input and changes the value
+        //according to it if its bigger that 0
         for (int i = 0; i < texts.Length; i++) {
             if (texts[i].transform.parent.name == "smallFishEnergyValueInput" && texts[i].name == "Text") {
                 if (float.TryParse(texts[i].text, out newEnergyValue)) {
@@ -219,6 +235,8 @@ public class UIController : MonoBehaviour
 
     public void MediumFishEnergyValueChange() {
         float newEnergyValue;
+        //for cycle that finds the medium fish energy value change input and changes the value
+        //according to it if its bigger that 0
         for (int i = 0; i < texts.Length; i++) {
             if (texts[i].transform.parent.name == "mediumFishEnergyValueInput" && texts[i].name == "Text") {
                 if (float.TryParse(texts[i].text, out newEnergyValue)) {
@@ -235,6 +253,8 @@ public class UIController : MonoBehaviour
 
     public void SmallFishStartEnergyChange() {
         float newEnergyValue;
+        //for cycle that finds the small fish energy start value change input and changes the value
+        //according to it if its bigger that 0
         for (int i = 0; i < texts.Length; i++) {
             if (texts[i].transform.parent.name == "smallFishStartEnergyInput" && texts[i].name == "Text") {
                 if (float.TryParse(texts[i].text, out newEnergyValue)) {
@@ -251,6 +271,8 @@ public class UIController : MonoBehaviour
 
     public void MediumFishStartEnergyChange() {
         float newEnergyValue;
+        //for cycle that finds the medium fish energy start value change input and changes the value
+        //according to it if its bigger that 0
         for (int i = 0; i < texts.Length; i++) {
             if (texts[i].transform.parent.name == "mediumFishStartEnergyInput" && texts[i].name == "Text") {
                 if (float.TryParse(texts[i].text, out newEnergyValue)) {
@@ -267,6 +289,8 @@ public class UIController : MonoBehaviour
 
     public void BigFishStartEnergyChange() {
         float newEnergyValue;
+        //for cycle that finds the big fish energy start value change input and changes the value
+        //according to it if its bigger that 0
         for (int i = 0; i < texts.Length; i++) {
             if (texts[i].transform.parent.name == "bigFishStartEnergyInput" && texts[i].name == "Text") {
                 if (float.TryParse(texts[i].text, out newEnergyValue)) {
@@ -283,6 +307,8 @@ public class UIController : MonoBehaviour
 
     public void SmallFishReproduceEnergyChange() {
         float newEnergyValue;
+        //for cycle that finds the small fish reproduce energy value change input and changes the value
+        //according to it if its bigger that 0
         for (int i = 0; i < texts.Length; i++) {
             if (texts[i].transform.parent.name == "smallFishReproduceEnergyInput" && texts[i].name == "Text") {
                 if (float.TryParse(texts[i].text, out newEnergyValue)) {
@@ -299,6 +325,8 @@ public class UIController : MonoBehaviour
 
     public void MediumFishReproduceEnergyChange() {
         float newEnergyValue;
+        //for cycle that finds the medium fish reproduce energy value change input and changes the value
+        //according to it if its bigger that 0
         for (int i = 0; i < texts.Length; i++) {
             if (texts[i].transform.parent.name == "mediumFishReproduceEnergyInput" && texts[i].name == "Text") {
                 if (float.TryParse(texts[i].text, out newEnergyValue)) {
@@ -315,6 +343,8 @@ public class UIController : MonoBehaviour
 
     public void BigFishReproduceEnergyChange() {
         float newEnergyValue;
+        //for cycle that finds the big fish reproduce energy value change input and changes the value
+        //according to it if its bigger that 0
         for (int i = 0; i < texts.Length; i++) {
             if (texts[i].transform.parent.name == "bigFishReproduceEnergyInput" && texts[i].name == "Text") {
                 if (float.TryParse(texts[i].text, out newEnergyValue)) {

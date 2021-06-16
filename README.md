@@ -106,7 +106,7 @@ The fish knows what other fishes and algae are nearby by making use of the
 	the current target.
 
 #### DangerInSight
-The `DangerInSight´ decision node works in a similar way to `TargetInSight`,
+The `DangerInSight` decision node works in a similar way to `TargetInSight`,
 	but checking what fish can eat the fish that calls it.
 
 #### TargetInEatRange

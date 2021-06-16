@@ -15,15 +15,4 @@ public class GameArea : MonoBehaviour
         MaxVec = new Vector3(col.bounds.max.x, col.bounds.max.y, col.bounds.max.z);
         MinVec = new Vector3(col.bounds.min.x, col.bounds.min.y, col.bounds.min.z);
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -17,17 +17,21 @@ public class Algae : MonoBehaviour, IFood
     }
     
     private void OnTriggerEnter(Collider other) {
+        //check if algae entered the upper limit 
         if (other.CompareTag("VerticalLimits")) {
             RemoveAlgae();
         }
     }
 
+    //removes algae from scene 
     public void RemoveAlgae() {
+        //decreases the algae count and disables it
         aiController.amountOfAlgae--;
         this.gameObject.SetActive(false);
     }
 
     private void OnDisable() {
+        //destroy algae when disabled 
         GameObject.Destroy(this.gameObject);
     }
 }
