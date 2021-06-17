@@ -414,7 +414,7 @@ public class AIBehaviour : MonoBehaviour
             vel = new Vector3(vel.x * -0.15f, vel.y, vel.z);
         }
         if (nextPos.y > gameArea.MaxVec.y - aiController.LimitPaddings.y) {
-            vel = new Vector3(vel.x, vel.y * -0.15f, vel.z);
+            vel = new Vector3(vel.x, -1f, vel.z);
         }
         if (nextPos.z > gameArea.MaxVec.z - aiController.LimitPaddings.z) {
             vel = new Vector3(vel.x, vel.y, vel.z * -0.15f);
@@ -423,7 +423,7 @@ public class AIBehaviour : MonoBehaviour
             vel = new Vector3(vel.x * -0.50f, vel.y, vel.z);
         }
         if (nextPos.y < gameArea.MinVec.y + aiController.LimitPaddings.y) {
-            vel = new Vector3(vel.x, vel.y * 0.15f, vel.z);
+            vel = new Vector3(vel.x, 1f, vel.z);
         }
         if (nextPos.z < gameArea.MinVec.z + aiController.LimitPaddings.z) {
             vel = new Vector3(vel.x, vel.y, vel.z * 0.15f);
